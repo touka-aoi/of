@@ -2,7 +2,7 @@
 
 //--------------------------------------------------------------
 void ofApp::setup(){
-	ofBackground(47, 47, 47); //背景色
+	ofBackground(0, 0, 0); //背景色
 	ofEnableAlphaBlending(); //アルファ値オン
 	ofSetCircleResolution(64);//円の解像度？
 }
@@ -14,10 +14,27 @@ void ofApp::update(){
 
 //--------------------------------------------------------------
 void ofApp::draw(){
-	ofSetColor(31, 127, 255, 127);
-	ofDrawCircle(1024 / 2, 768 / 2, 100);
-	ofDrawCircle(1024 / 2, 768 / 2, 100 + 40);
-	ofDrawCircle(1024 / 2, 768 / 2, 100 + 80);
+	float x; //円のx座標
+	float y; //円のy座標
+	float radius; //rad
+	float alpha = 12; //アルファ
+	ofSetColor(31, 127, 255, alpha); //描画色
+	x = ofGetWidth() / 2;
+	y = ofGetHeight() / 2;
+	radius = ofGetWidth() / 40;
+	for (int i = 0; i <= 50; i++) {
+		ofDrawCircle(x, y, radius);
+		radius += 4;
+		x += 2;
+		y += 3;
+		// アルファが120 -> 12ってどういうことだろうか？
+		// alpha -= (120 - 12) / 50;
+	}
+	
+	//アルファ確認用
+	//ofSetColor(31, 127, 255, 255);
+	//ofDrawRectangle(0, 0, 100, 200);
+
 }
 
 //--------------------------------------------------------------
