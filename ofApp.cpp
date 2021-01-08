@@ -1,9 +1,31 @@
-#include "ofApp.h"
+ï»¿#include "ofApp.h"
+
+vector<float> x(1000);
+vector<float> y(1000);
+vector<float> rad(1000);
+vector<float> start_x(1000);
+vector<float> start_y(1000);
+vector<float> end_x(1000);
+vector<float> end_y(1000);
+
 
 //--------------------------------------------------------------
 void ofApp::setup(){
-	ofBackground(47, 47, 47); //”wŒiF
-	ofEnableAlphaBlending(); //ƒAƒ‹ƒtƒ@’lƒIƒ“
+	ofBackground(47, 47, 47); //èƒŒæ™¯è‰²
+	ofEnableAlphaBlending(); //ã‚¢ãƒ«ãƒ•ã‚¡å€¤ã‚ªãƒ³
+	ofSetCircleResolution(64);
+	ofSetLineWidth(2);
+	ofEnableSmoothing();
+	ofSeedRandom();
+	for (int i = 0; i < 1000; i++) {
+		x.at(i) = ofRandom(0, ofGetWidth()); //xåº§æ¨™
+		y.at(i) = ofRandom(0, ofGetHeight()); //yåº§æ¨™
+		rad.at(i) = ofRandom(10, 40); //åŠå¾„a
+		start_x.at(i) = ofRandom(0, ofGetWidth());
+		start_y.at(i) = ofRandom(0, ofGetHeight());
+		end_x.at(i) = ofRandom(0, ofGetWidth());
+		end_x.at(i) = ofRandom(0, ofGetHeight());
+	}
 }
 
 //--------------------------------------------------------------
@@ -13,24 +35,11 @@ void ofApp::update(){
 
 //--------------------------------------------------------------
 void ofApp::draw(){
-	float x; //point x
-	float y; //pint y
-	float w; //width
-	float h; //height
-
-	w = ofGetWidth() / 30.0;
-	h = ofGetHeight() / 20.0; 
-	x = 0;
-	y = ofGetHeight() / 2 - h / 2; 
-	for (int i = 0; i < 30; i++) {
-		for (int j = 1; j <= 20; j++) {
-			ofSetColor(255 / 20 * j, 127, 255 / 30 * i, 127);
-			y = ofGetHeight() - ofGetHeight() / 20.0 * j;
-			x = ofGetWidth() / 30.0 * i;
-			ofDrawRectangle(x, y, w, h);
-		}
+	ofSetColor(31, 63, 255, 63); //æç”»è‰²
+	for (int i = 0; i < 1000; i++) {
+		ofDrawCircle(x.at(i), y.at(i), rad.at(i));
+		ofDrawLine(start_x.at(i), start_y.at(i), end_x.at(i), end_y.at(i));
 	}
-
 }
 
 //--------------------------------------------------------------
