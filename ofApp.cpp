@@ -1,30 +1,24 @@
 ﻿#include "ofApp.h"
 
-vector<float> x(1000);
-vector<float> y(1000);
-vector<float> rad(1000);
-vector<float> start_x(1000);
-vector<float> start_y(1000);
-vector<float> end_x(1000);
-vector<float> end_y(1000);
+vector<int> red(768);
+vector<int> blue(768);
+vector<int> green(768);
+
+
+
+
 
 
 //--------------------------------------------------------------
 void ofApp::setup(){
 	ofBackground(47, 47, 47); //背景色
 	ofEnableAlphaBlending(); //アルファ値オン
-	ofSetCircleResolution(64);
-	ofSetLineWidth(2);
 	ofEnableSmoothing();
 	ofSeedRandom();
-	for (int i = 0; i < 1000; i++) {
-		x.at(i) = ofRandom(0, ofGetWidth()); //x座標
-		y.at(i) = ofRandom(0, ofGetHeight()); //y座標
-		rad.at(i) = ofRandom(10, 40); //半径a
-		start_x.at(i) = ofRandom(0, ofGetWidth());
-		start_y.at(i) = ofRandom(0, ofGetHeight());
-		end_x.at(i) = ofRandom(0, ofGetWidth());
-		end_x.at(i) = ofRandom(0, ofGetHeight());
+	for (int i = 0; i < 768; i++) {
+		red.at(i) = ofRandom(0, 31);
+		green.at(i) = ofRandom(31, 63);
+		blue.at(i) = ofRandom(31, 63);
 	}
 }
 
@@ -36,9 +30,9 @@ void ofApp::update(){
 //--------------------------------------------------------------
 void ofApp::draw(){
 	ofSetColor(31, 63, 255, 63); //描画色
-	for (int i = 0; i < 1000; i++) {
-		ofDrawCircle(x.at(i), y.at(i), rad.at(i));
-		ofDrawLine(start_x.at(i), start_y.at(i), end_x.at(i), end_y.at(i));
+	for (int i = 0; i < 768; i++) {
+		ofSetColor(red.at(i), green.at(i), blue.at(i));
+		ofDrawLine(0, i, ofGetWidth(), i);
 	}
 }
 
