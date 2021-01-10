@@ -47,6 +47,7 @@ void ofApp::update(){
 
 //--------------------------------------------------------------
 void ofApp::draw(){
+	ofDrawBitmapString(ofToString(ofGetFrameRate()) + "fps", 20, 20);
 	for (int i = 0; i < NUM; i++) {
 		ofSetColor(red.at(i), blue.at(i), green.at(i), 127);
 		ofDrawCircle(loc_x.at(i), loc_y.at(i), radius.at(i));
