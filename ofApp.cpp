@@ -1,19 +1,16 @@
 ﻿#include "ofApp.h"
 
-float loc_x1; //円のx位置
-float loc_y1; //円のy位置
-float speed_x1; //xの速度
-float speed_y1; //yの速度
+static const int NUM = 1000; //実行する円の数
 
-float loc_x2; //円のx位置
-float loc_y2; //円のy位置
-float speed_x2; //xの速度
-float speed_y2; //yの速度
+vector<float> loc_x(NUM);
+vector<float> loc_y(NUM);
+vector<float> speed_x(NUM);
+vector<float> speed_y(NUM);
+vector<float> radius(NUM);
 
-float loc_x3; //円のx位置
-float loc_y3; //円のy位置
-float speed_x3; //xの速度
-float speed_y3; //yの速度
+vector<int> red(NUM);
+vector<int> blue(NUM);
+vector<int> green(NUM);
 
 //--------------------------------------------------------------
 void ofApp::setup(){
@@ -21,56 +18,39 @@ void ofApp::setup(){
 	ofSetFrameRate(60);
 	ofSetCircleResolution(64);
 	ofEnableAlphaBlending();
-	//初期位置
-	loc_x1 = ofRandom(0, ofGetWidth());
-	loc_y1 = ofRandom(0, ofGetHeight());
-	//初速度
-	speed_x1 = ofRandom(-10, 10); 
-	speed_y1 = ofRandom(-10, 10);
-	//初期位置
-	loc_x2 = ofRandom(0, ofGetWidth());
-	loc_y2 = ofRandom(0, ofGetHeight());
-	//初速度
-	speed_x2 = ofRandom(-10, 10);
-	speed_y2 = ofRandom(-10, 10);
-	//初期位置
-	loc_x3 = ofRandom(0, ofGetWidth());
-	loc_y3 = ofRandom(0, ofGetHeight());
-	//初速度
-	speed_x3 = ofRandom(-10, 10);
-	speed_y3 = ofRandom(-10, 10);
+
+	for (int i = 0; i < NUM; i++) {
+		loc_x.at(i) = ofRandom(0, ofGetWidth());
+		loc_y.at(i) = ofRandom(0, ofGetHeight());
+		speed_x.at(i) = ofRandom(-5, 5);
+		speed_y.at(i) = ofRandom(-5, 5);
+		radius.at(i) = ofRandom(4, 40);
+		red.at(i) = ofRandom(0, 255);
+		green.at(i) = ofRandom(0, 255);
+		blue.at(i) = ofRandom(0, 255);
+	}
 }
 
 //--------------------------------------------------------------
 void ofApp::update(){
-	loc_x1 += speed_x1;
-	loc_y1 += speed_y1; 
-	loc_x2 += speed_x2;
-	loc_y2 += speed_y2;
-	loc_x3 += speed_x3;
-	loc_y3 += speed_y3;
-	if (loc_x1 > ofGetWidth() - 40) speed_x1 = speed_x1 * -1;
-	if (loc_x1 < 0 + 40) speed_x1 = speed_x1 * -1;
-	if (loc_y1 > ofGetHeight() - 40) speed_y1 = speed_y1 * -1;
-	if (loc_y1 < 0 + 40) speed_y1 = speed_y1 * -1;
+	for (int i = 0; i < NUM; i++) {
+		loc_x.at(i) += speed_x.at(i);
+		loc_y.at(i) += speed_y.at(i);
 
-	if (loc_x2 > ofGetWidth() - 40) speed_x2 = speed_x2 * -1;
-	if (loc_x2 < 0 + 40) speed_x2 = speed_x2 * -1;
-	if (loc_y2 > ofGetHeight() - 40) speed_y2 = speed_y2 * -1;
-	if (loc_y2 < 0 + 40) speed_y2 = speed_y2 * -1;
+		if (loc_x.at(i) > ofGetWidth() - 40) speed_x.at(i) = speed_x.at(i) * -1;
+		if (loc_x.at(i) < 0 + 40) speed_x.at(i) = speed_x.at(i) * -1;
+		if (loc_y.at(i) > ofGetHeight() - 40) speed_y.at(i) = speed_y.at(i) * -1;
+		if (loc_y.at(i) < 0 + 40) speed_y.at(i) = speed_y.at(i) * -1;
 
-	if (loc_x3 > ofGetWidth() - 40) speed_x3 = speed_x3 * -1;
-	if (loc_x3 < 0 + 40) speed_x3 = speed_x3 * -1;
-	if (loc_y3 > ofGetHeight() - 40) speed_y3 = speed_y3 * -1;
-	if (loc_y3 < 0 + 40) speed_y3 = speed_y3 * -1;
+	}
 }
 
 //--------------------------------------------------------------
 void ofApp::draw(){
-	ofSetColor(31, 63, 255); //描画色
-	ofDrawCircle(loc_x1, loc_y1, 40);		
-	ofDrawCircle(loc_x2, loc_y2, 40);
-	ofDrawCircle(loc_x3, loc_y3, 40);
+	for (int i = 0; i < NUM; i++) {
+		ofSetColor(red.at(i), blue.at(i), green.at(i), 127);
+		ofDrawCircle(loc_x.at(i), loc_y.at(i), radius.at(i));
+	}
 }
 
 //--------------------------------------------------------------
