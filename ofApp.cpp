@@ -1,39 +1,37 @@
 ﻿#include "ofApp.h"
 
-vector<int> red(768);
-vector<int> blue(768);
-vector<int> green(768);
-
-
-
-
-
+float loc_x; //円のx位置
+float loc_y; //円のy位置
+float speed_x; //xの速度
+float speed_y; //yの速度
 
 //--------------------------------------------------------------
 void ofApp::setup(){
 	ofBackground(47, 47, 47); //背景色
-	ofEnableAlphaBlending(); //アルファ値オン
-	ofEnableSmoothing();
-	ofSeedRandom();
-	for (int i = 0; i < 768; i++) {
-		red.at(i) = ofRandom(0, 31);
-		green.at(i) = ofRandom(31, 63);
-		blue.at(i) = ofRandom(31, 63);
-	}
+	ofSetFrameRate(60);
+	ofSetCircleResolution(64);
+	//初期位置
+	loc_x = ofGetHeight() / 2;
+	loc_y = ofGetWidth() / 2;
+	//初速度
+	speed_x = 7; 
+	speed_y = 7;
 }
 
 //--------------------------------------------------------------
 void ofApp::update(){
-
+	loc_x += speed_x;
+	loc_y += speed_y; 
+	if (loc_x > ofGetWidth() - 40) speed_x = speed_x * -1;
+	if (loc_x < 0 + 40) speed_x = speed_x * -1;
+	if (loc_y > ofGetHeight() - 40) speed_y = speed_y * -1;
+	if (loc_y < 0 + 40) speed_y = speed_y * -1;
 }
 
 //--------------------------------------------------------------
 void ofApp::draw(){
-	ofSetColor(31, 63, 255, 63); //描画色
-	for (int i = 0; i < 768; i++) {
-		ofSetColor(red.at(i), green.at(i), blue.at(i));
-		ofDrawLine(0, i, ofGetWidth(), i);
-	}
+	ofSetColor(31, 63, 255); //描画色
+	ofDrawCircle(loc_x, loc_y, 40);		
 }
 
 //--------------------------------------------------------------
