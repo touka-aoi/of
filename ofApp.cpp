@@ -1,16 +1,11 @@
 ﻿#include "ofApp.h"
 
-static const int NUM = 1000; //実行する円の数
+int red;
+int blue;
+int green;
 
-vector<float> loc_x(NUM);
-vector<float> loc_y(NUM);
-vector<float> speed_x(NUM);
-vector<float> speed_y(NUM);
-vector<float> radius(NUM);
-
-vector<int> red(NUM);
-vector<int> blue(NUM);
-vector<int> green(NUM);
+float loc_x;
+float loc_y;
 
 //--------------------------------------------------------------
 void ofApp::setup(){
@@ -18,40 +13,20 @@ void ofApp::setup(){
 	ofSetFrameRate(60);
 	ofSetCircleResolution(64);
 	ofEnableAlphaBlending();
-
-	for (int i = 0; i < NUM; i++) {
-		loc_x.at(i) = ofRandom(0, ofGetWidth());
-		loc_y.at(i) = ofRandom(0, ofGetHeight());
-		speed_x.at(i) = ofRandom(-5, 5);
-		speed_y.at(i) = ofRandom(-5, 5);
-		radius.at(i) = ofRandom(4, 40);
-		red.at(i) = ofRandom(0, 255);
-		green.at(i) = ofRandom(0, 255);
-		blue.at(i) = ofRandom(0, 255);
-	}
+	loc_x = ofGetWidth() / 2;
+	loc_y = ofGetHeight() / 2;
 }
 
 //--------------------------------------------------------------
 void ofApp::update(){
-	for (int i = 0; i < NUM; i++) {
-		loc_x.at(i) += speed_x.at(i);
-		loc_y.at(i) += speed_y.at(i);
-
-		if (loc_x.at(i) > ofGetWidth() - 40) speed_x.at(i) = speed_x.at(i) * -1;
-		if (loc_x.at(i) < 0 + 40) speed_x.at(i) = speed_x.at(i) * -1;
-		if (loc_y.at(i) > ofGetHeight() - 40) speed_y.at(i) = speed_y.at(i) * -1;
-		if (loc_y.at(i) < 0 + 40) speed_y.at(i) = speed_y.at(i) * -1;
-
-	}
 }
 
 //--------------------------------------------------------------
 void ofApp::draw(){
+	ofSetColor(255, 255, 255, 255);
 	ofDrawBitmapString(ofToString(ofGetFrameRate()) + "fps", 20, 20);
-	for (int i = 0; i < NUM; i++) {
-		ofSetColor(red.at(i), blue.at(i), green.at(i), 127);
-		ofDrawCircle(loc_x.at(i), loc_y.at(i), radius.at(i));
-	}
+	ofSetColor(red, green, blue, 127);
+	ofDrawCircle(loc_x, loc_y, 40);
 }
 
 //--------------------------------------------------------------
@@ -66,22 +41,32 @@ void ofApp::keyReleased(int key){
 
 //--------------------------------------------------------------
 void ofApp::mouseMoved(int x, int y ){
-
+	//円の色をグレーに
+	loc_x = x;
+	loc_y = y;
 }
 
 //--------------------------------------------------------------
 void ofApp::mouseDragged(int x, int y, int button){
-
+	loc_x = x;
+	loc_y = y;	
 }
 
 //--------------------------------------------------------------
 void ofApp::mousePressed(int x, int y, int button){
+	loc_x = x;
+	loc_y = y;
 
+	red = 255;
+	green = 63;
+	blue = 31;
 }
 
 //--------------------------------------------------------------
 void ofApp::mouseReleased(int x, int y, int button){
-
+	red = 41;
+	green = 63;
+	blue = 255;
 }
 
 //--------------------------------------------------------------
