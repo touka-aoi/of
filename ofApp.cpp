@@ -18,6 +18,7 @@ float friction;
 
 //--------------------------------------------------------------
 void ofApp::setup() {
+	ofSetBackgroundAuto(false);
 	ofBackground(47, 47, 47); //背景色
 	ofSetFrameRate(60);
 	ofSetCircleResolution(64);
@@ -65,6 +66,8 @@ void ofApp::update() {
 //--------------------------------------------------------------
 void ofApp::draw() {
 	ofDrawBitmapString(ofToString(ofGetFrameRate()) + "fps", 20, 20);
+	ofSetColor(0, 0, 0, 23);
+	ofDrawRectangle(0, 0, ofGetWidth(), ofGetHeight());
 	for (int i = 0; i < NUM; i++) {
 		ofSetColor(red.at(i), blue.at(i), green.at(i), 127);
 		ofDrawCircle(loc_x.at(i), loc_y.at(i), radius.at(i));
