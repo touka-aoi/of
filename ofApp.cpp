@@ -13,6 +13,8 @@ vector<int> blue(NUM);
 vector<int> green(NUM);
 
 bool mouse_pressed;
+float gravity; 
+float friction;
 
 //--------------------------------------------------------------
 void ofApp::setup() {
@@ -21,6 +23,8 @@ void ofApp::setup() {
 	ofSetCircleResolution(64);
 	ofEnableAlphaBlending();
 	mouse_pressed = false;
+	gravity = 0.1;
+	friction = 0.999;
 
 	for (int i = 0; i < NUM; i++) {
 		loc_x.at(i) = ofRandom(0, ofGetWidth());
@@ -42,7 +46,10 @@ void ofApp::update() {
 			speed_y.at(i) = (mouseY - loc_y.at(i)) / 8.0;
 		}
 
-	
+		speed_x.at(i) *= friction;
+		speed_y.at(i) *= friction;
+		speed_y.at(i) += gravity;
+
 		//距離が足されて速度になる
 		loc_x.at(i) += speed_x.at(i);
 		loc_y.at(i) += speed_y.at(i);
