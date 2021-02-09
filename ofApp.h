@@ -21,13 +21,5 @@ class ofApp : public ofBaseApp{
 		void dragEvent(ofDragInfo dragInfo);
 		void gotMessage(ofMessage msg);
 		//void audioReceived(float* input, int bufferSize, int nChannels);
-		void audioIn(ofSoundBuffer &input);
-
-		ofSoundStream soundStream;
-		int bufSize;
-		float* left;
-		float* right;
-		float curVol;
-		float deg;
-		float radius;
+		ofSoundPlayer mySound;
 };
