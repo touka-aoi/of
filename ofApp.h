@@ -20,18 +20,12 @@ class ofApp : public ofBaseApp{
 		void windowResized(int w, int h);
 		void dragEvent(ofDragInfo dragInfo);
 		void gotMessage(ofMessage msg);
-		void audioOut(ofSoundBuffer& buffer);
+		//void audioReceived(float* input, int bufferSize, int nChannels);
+		void audioIn(ofSoundBuffer &input);
 
 		ofSoundStream soundStream;
-		int sampleRate;
-		float amp;
-		float pan;
-		float phase;
-		float frequency;
-		float bufSize;
-
-		int waveShape;
-
-		float lAudio[512];
-		float rAudio[512];
+		int bufSize;
+		float* left;
+		float* right;
+		float curVol;
 };
