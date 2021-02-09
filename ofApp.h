@@ -28,4 +28,6 @@ class ofApp : public ofBaseApp{
 		float* left;
 		float* right;
 		float curVol;
+		float deg;
+		float radius;
 };
