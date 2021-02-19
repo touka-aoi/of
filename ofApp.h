@@ -20,5 +20,14 @@ class ofApp : public ofBaseApp{
 		void windowResized(int w, int h);
 		void dragEvent(ofDragInfo dragInfo);
 		void gotMessage(ofMessage msg);
+
+		ofSoundPlayer mysound; //インスタンス
+
+		//変数
+		float Pan_value; //パンした値
+		float speed_value; //変更後の速度
+		float def_speed; //最初の再生速度 (1)
+		float radius; //円の半径
+		float* val; //なにこれ？
 		
 };
